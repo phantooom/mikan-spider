@@ -31,7 +31,7 @@ def walk_dir(dir,topdown=True):
 
 
 
-def parse_json(json_file):
+def pase_json(json_file):
     titles = []
     with open(json_file, 'r', encoding='utf-8') as f:
         content = f.read()
@@ -44,11 +44,11 @@ def parse_json(json_file):
             for item in items:
                 titles.append(item['title'])
     return titles
-def parse_all_json(dir):
+def pase_all_json(dir):
     all_titles = []
     for file in walk_dir(dir):
         if file.endswith('.json'):
-            titles = parse_json(file)
+            titles = pase_json(file)
             all_titles.extend(titles)
     with open('all_titles.txt', 'w', encoding='utf-8') as f:
         f.write('\n'.join(all_titles))
@@ -56,4 +56,4 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='parser for mikanani.me rss json')
     parser.add_argument('--dir', '-d', help='dir',default='./mikan_data')
     args = parser.parse_args()
-    parse_all_json(args.dir)
+    pase_all_json(args.dir)
